@@ -1,0 +1,29 @@
+info:
+  name: create-invisitor
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/property-invisitors/create"
+  body:
+    type: json
+    data: |-
+      {
+        "propertyId": "6b6a8d32-e306-4ac2-a296-b748c6ba6362",
+        "userId": "315813fe-88b9-40f3-89f9-bbf1e4429df1",
+        "name": "Ahmed Mohammed",
+        "email": "ahmed@example.com",
+        "phoneNumber": "+966501234567",
+        "relationship": "OWNER",
+        "idNumber": "1234567890",
+        "idType": "NATIONAL_ID",
+        "additionalInfo": "Primary contact for property"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

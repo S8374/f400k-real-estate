@@ -1,0 +1,20 @@
+info:
+  name: get-accept-paymentplanUserId
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/payment-plan/buyer/{{buyerId}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: buyerId
+      value: 5cc1a78f-8032-4967-bcd0-3c408640e02f
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,28 @@
+info:
+  name: login
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/auth/login"
+  body:
+    type: json
+    data: |+
+      // {
+      // 55ca7e69-af9f-4a65-a947-72d4dfef1821
+      //   "email": "azharmahmud730@gmail.com",
+      //   "password": "azharmahmud730@gmail.com"
+      // }
+      {
+        "email": "0sabbirmridha880@gmail.com",
+        "password": "0sabbirmridha880@gmail.com"
+      }
+
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

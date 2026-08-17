@@ -1,0 +1,20 @@
+info:
+  name: delete
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/api/v1/property-invisitors/delete/{{invisor-uuid-here}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: invisor-uuid-here
+      value: 40876a60-5d0b-4608-859d-25e18181de46
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

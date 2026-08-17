@@ -1,0 +1,28 @@
+info:
+  name: update
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/api/v1/bank-accounts/update/{{id}}"
+  body:
+    type: json
+    data: |-
+      {
+        "bankName": "Al Rajhi Bank - Updated",
+        "branchAddress": "New Branch Address",
+        "additionalInfo": "Updated information"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: id
+      value: 57a4b80d-a556-439e-bce1-f16cfde8fa8f
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

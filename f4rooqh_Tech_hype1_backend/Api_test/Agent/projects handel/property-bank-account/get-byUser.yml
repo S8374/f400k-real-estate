@@ -1,0 +1,20 @@
+info:
+  name: get-byUser
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/bank-accounts/user/{{user-uuid-here}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: user-uuid-here
+      value: 315813fe-88b9-40f3-89f9-bbf1e4429df1
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,23 @@
+info:
+  name: review
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/agent/milestone-payments/review"
+  body:
+    type: json
+    data: |-
+      {
+        "paymentId": "f8578b48-c87d-47f8-8302-be53a6763313",
+        "agentId": "315813fe-88b9-40f3-89f9-bbf1e4429df1",
+        "notes": "Payment verified"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

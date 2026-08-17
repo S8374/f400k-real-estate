@@ -1,0 +1,6 @@
+import { CreateBankAccountDto } from './create-bank-account.dto';
+declare const UpdateBankAccountDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateBankAccountDto>>;
+export declare class UpdateBankAccountDto extends UpdateBankAccountDto_base {
+    id?: string;
+}
+export {};

@@ -1,0 +1,27 @@
+info:
+  name: update
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/api/v1/property-invisitors/update/{{userId}}"
+  body:
+    type: json
+    data: |-
+      {
+        "phoneNumber": "+966501234569",
+        "additionalInfo": "Updated contact info"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: userId
+      value: 40876a60-5d0b-4608-859d-25e18181de46
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

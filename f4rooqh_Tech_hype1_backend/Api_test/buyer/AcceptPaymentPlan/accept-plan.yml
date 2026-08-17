@@ -1,0 +1,24 @@
+info:
+  name: accept-plan
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/payment-plan/accept"
+  body:
+    type: json
+    data: |-
+      {
+        "agentId": "55ca7e69-af9f-4a65-a947-72d4dfef1821",
+        "buyerId": "55ca7e69-af9f-4a65-a947-72d4dfef1821",
+        "propertyId": "9f0d2b68-179c-439a-be77-abb4a56554f4",
+        "paymentPlanId": "3b76d1fe-3be5-445a-8dc0-1e9a73422e13"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

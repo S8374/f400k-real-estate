@@ -1,0 +1,1 @@
+{"version":3,"file":"newsletter.js","sourceRoot":"","sources":["../../../src/mail/templates/newsletter.ts"],"names":[],"mappings":";;AAMA,0DAcC;AApBD,qCAIkB;AAElB,SAAgB,uBAAuB,CAAC,eAAuB;IAC7D,OAAO;kBACS,IAAA,qBAAY,GAAE;oBACZ,IAAA,uBAAc,GAAE;;;;;mCAKD,eAAe;oBAC9B,IAAA,uBAAc,GAAE;oBAChB,IAAI,IAAI,EAAE,CAAC,WAAW,EAAE;;;GAGzC,CAAC;AACJ,CAAC"}

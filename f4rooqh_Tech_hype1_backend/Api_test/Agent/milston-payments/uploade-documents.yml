@@ -1,0 +1,24 @@
+info:
+  name: uploade-documents
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/agent/milestone-payments/upload"
+  body:
+    type: json
+    data: |-
+      {
+        "paymentId": "f8578b48-c87d-47f8-8302-be53a6763313",
+        "agentId": "79060848-e28b-4d7d-aec8-422fa40aff41",
+        "documentUrl": "https://storage.com/agreement.pdf",
+        "notes": "Signed agreement"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

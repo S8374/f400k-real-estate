@@ -1,0 +1,416 @@
+import { PrismaService } from '../../common/context/prisma.service';
+import { Prisma } from '@prisma/client';
+export declare class MilestonePaymentService {
+    private readonly prisma;
+    constructor(prisma: PrismaService);
+    validateMilestone(milestoneId: string, propertyId?: string): Promise<{
+        plan: {
+            property: {
+                id: string;
+                status: import("@prisma/client").$Enums.PropertyStatus;
+                createdAt: Date;
+                updatedAt: Date;
+                type: import("@prisma/client").$Enums.ProjectType;
+                isRegaVerified: boolean | null;
+                listingAgentId: string;
+                listingPurpose: import("@prisma/client").$Enums.ListingPurpose;
+                developerId: string | null;
+                zoneId: string | null;
+                images: string[];
+                totalUnits: number | null;
+                availableUnits: number | null;
+                latitude: number | null;
+                longitude: number | null;
+                addressLine: string | null;
+                mapEmbedUrl: string | null;
+                location: string | null;
+                title: string;
+                description: string | null;
+                price: number;
+                currency: string;
+                areaSqm: number | null;
+                areaSqFt: number | null;
+                bedrooms: number | null;
+                bathrooms: number | null;
+                balconies: number | null;
+                floorNumber: number | null;
+                yearBuilt: number | null;
+                parkingSlots: number | null;
+                furnished: boolean | null;
+                isBooked: boolean | null;
+                sakNumber: string | null;
+                roiProjectionPercent: number | null;
+                estimatedRentalIncome: number | null;
+                estimatedRentalCurrency: string | null;
+                valueApproximate: number | null;
+                valueApproximateCurrency: string | null;
+                views: number;
+                featuredUntil: Date | null;
+            };
+        } & {
+            id: string;
+            createdAt: Date;
+            name: string;
+            description: string | null;
+            propertyId: string;
+            totalInstallments: number | null;
+            createdById: string | null;
+        };
+    } & {
+        id: string;
+        description: string;
+        milestoneOrder: number;
+        planId: string;
+        tittle: string | null;
+        amount: number | null;
+        dueDate: Date | null;
+        constructionProgress: number | null;
+    }>;
+    validateBuyer(buyerId: string): Promise<{
+        investmentField: string | null;
+        investmentBudgetMin: number | null;
+        investmentBudgetMax: number | null;
+        preferredPropertyTypes: string[];
+        userId: string;
+        isNafathVerified: boolean;
+        kycStatus: import("@prisma/client").$Enums.KycStatus;
+    }>;
+    validateAgent(agentId: string): Promise<{
+        verifiedAt: Date | null;
+        agencyName: string | null;
+        bio: string | null;
+        yearsExperience: number | null;
+        userId: string;
+        licenseId: string | null;
+        isRegaVerified: boolean;
+        isNafathVerified: boolean;
+        trustScore: number;
+    }>;
+    validateAdmin(adminId: string): Promise<{
+        id: string;
+        email: string;
+        phoneNumber: string | null;
+        password: string | null;
+        fullName: string | null;
+        avatarUrl: string | null;
+        nationality: string | null;
+        role: import("@prisma/client").$Enums.Role;
+        status: import("@prisma/client").$Enums.UserStatus;
+        isVerified: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        verifiedAt: Date | null;
+        lastLogin: Date | null;
+        lastActive: Date | null;
+        isOnline: boolean;
+    }>;
+    validatePaymentAccess(paymentId: string, buyerId?: string, agentId?: string): Promise<{
+        milestone: {
+            plan: {
+                property: {
+                    id: string;
+                    status: import("@prisma/client").$Enums.PropertyStatus;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    type: import("@prisma/client").$Enums.ProjectType;
+                    isRegaVerified: boolean | null;
+                    listingAgentId: string;
+                    listingPurpose: import("@prisma/client").$Enums.ListingPurpose;
+                    developerId: string | null;
+                    zoneId: string | null;
+                    images: string[];
+                    totalUnits: number | null;
+                    availableUnits: number | null;
+                    latitude: number | null;
+                    longitude: number | null;
+                    addressLine: string | null;
+                    mapEmbedUrl: string | null;
+                    location: string | null;
+                    title: string;
+                    description: string | null;
+                    price: number;
+                    currency: string;
+                    areaSqm: number | null;
+                    areaSqFt: number | null;
+                    bedrooms: number | null;
+                    bathrooms: number | null;
+                    balconies: number | null;
+                    floorNumber: number | null;
+                    yearBuilt: number | null;
+                    parkingSlots: number | null;
+                    furnished: boolean | null;
+                    isBooked: boolean | null;
+                    sakNumber: string | null;
+                    roiProjectionPercent: number | null;
+                    estimatedRentalIncome: number | null;
+                    estimatedRentalCurrency: string | null;
+                    valueApproximate: number | null;
+                    valueApproximateCurrency: string | null;
+                    views: number;
+                    featuredUntil: Date | null;
+                };
+            } & {
+                id: string;
+                createdAt: Date;
+                name: string;
+                description: string | null;
+                propertyId: string;
+                totalInstallments: number | null;
+                createdById: string | null;
+            };
+        } & {
+            id: string;
+            description: string;
+            milestoneOrder: number;
+            planId: string;
+            tittle: string | null;
+            amount: number | null;
+            dueDate: Date | null;
+            constructionProgress: number | null;
+        };
+    } & {
+        id: string;
+        status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+        createdAt: Date;
+        verifiedAt: Date | null;
+        paidAt: Date;
+        adminId: string | null;
+        buyerId: string;
+        milestoneId: string;
+        agentId: string | null;
+        amountPaid: number;
+        proofUrls: string[];
+        agentReviewedAt: Date | null;
+        rejectedAt: Date | null;
+        rejectionReason: string | null;
+        notes: string | null;
+        isReadByBuyer: boolean;
+        isReadByAgent: boolean;
+        isReadByAdmin: boolean;
+        agentDocumentUrls: string[];
+        agentDocumentNote: string | null;
+        agentUploadedAt: Date | null;
+    }>;
+    findPayments(where: Prisma.MilestonePaymentWhereInput, include?: Prisma.MilestonePaymentInclude, page?: number, limit?: number): Promise<{
+        data: ({
+            milestone: {
+                id: string;
+                description: string;
+                milestoneOrder: number;
+                planId: string;
+                tittle: string | null;
+                amount: number | null;
+                dueDate: Date | null;
+                constructionProgress: number | null;
+            };
+            agent: {
+                id: string;
+                email: string;
+                phoneNumber: string | null;
+                password: string | null;
+                fullName: string | null;
+                avatarUrl: string | null;
+                nationality: string | null;
+                role: import("@prisma/client").$Enums.Role;
+                status: import("@prisma/client").$Enums.UserStatus;
+                isVerified: boolean;
+                createdAt: Date;
+                updatedAt: Date;
+                verifiedAt: Date | null;
+                lastLogin: Date | null;
+                lastActive: Date | null;
+                isOnline: boolean;
+            } | null;
+            admin: {
+                id: string;
+                email: string;
+                phoneNumber: string | null;
+                password: string | null;
+                fullName: string | null;
+                avatarUrl: string | null;
+                nationality: string | null;
+                role: import("@prisma/client").$Enums.Role;
+                status: import("@prisma/client").$Enums.UserStatus;
+                isVerified: boolean;
+                createdAt: Date;
+                updatedAt: Date;
+                verifiedAt: Date | null;
+                lastLogin: Date | null;
+                lastActive: Date | null;
+                isOnline: boolean;
+            } | null;
+            buyer: {
+                id: string;
+                email: string;
+                phoneNumber: string | null;
+                password: string | null;
+                fullName: string | null;
+                avatarUrl: string | null;
+                nationality: string | null;
+                role: import("@prisma/client").$Enums.Role;
+                status: import("@prisma/client").$Enums.UserStatus;
+                isVerified: boolean;
+                createdAt: Date;
+                updatedAt: Date;
+                verifiedAt: Date | null;
+                lastLogin: Date | null;
+                lastActive: Date | null;
+                isOnline: boolean;
+            };
+        } & {
+            id: string;
+            status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+            createdAt: Date;
+            verifiedAt: Date | null;
+            paidAt: Date;
+            adminId: string | null;
+            buyerId: string;
+            milestoneId: string;
+            agentId: string | null;
+            amountPaid: number;
+            proofUrls: string[];
+            agentReviewedAt: Date | null;
+            rejectedAt: Date | null;
+            rejectionReason: string | null;
+            notes: string | null;
+            isReadByBuyer: boolean;
+            isReadByAgent: boolean;
+            isReadByAdmin: boolean;
+            agentDocumentUrls: string[];
+            agentDocumentNote: string | null;
+            agentUploadedAt: Date | null;
+        })[];
+        meta: {
+            total: number;
+            page: number;
+            limit: number;
+            totalPages: number;
+        };
+    }>;
+    findOne(id: string): Promise<{
+        milestone: {
+            plan: {
+                property: {
+                    id: string;
+                    listingAgentId: string;
+                    title: string;
+                };
+                milestones: ({
+                    payments: {
+                        id: string;
+                        status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+                        createdAt: Date;
+                        verifiedAt: Date | null;
+                        paidAt: Date;
+                        adminId: string | null;
+                        buyerId: string;
+                        milestoneId: string;
+                        agentId: string | null;
+                        amountPaid: number;
+                        proofUrls: string[];
+                        agentReviewedAt: Date | null;
+                        rejectedAt: Date | null;
+                        rejectionReason: string | null;
+                        notes: string | null;
+                        isReadByBuyer: boolean;
+                        isReadByAgent: boolean;
+                        isReadByAdmin: boolean;
+                        agentDocumentUrls: string[];
+                        agentDocumentNote: string | null;
+                        agentUploadedAt: Date | null;
+                    }[];
+                } & {
+                    id: string;
+                    description: string;
+                    milestoneOrder: number;
+                    planId: string;
+                    tittle: string | null;
+                    amount: number | null;
+                    dueDate: Date | null;
+                    constructionProgress: number | null;
+                })[];
+            } & {
+                id: string;
+                createdAt: Date;
+                name: string;
+                description: string | null;
+                propertyId: string;
+                totalInstallments: number | null;
+                createdById: string | null;
+            };
+        } & {
+            id: string;
+            description: string;
+            milestoneOrder: number;
+            planId: string;
+            tittle: string | null;
+            amount: number | null;
+            dueDate: Date | null;
+            constructionProgress: number | null;
+        };
+        agent: {
+            id: string;
+            email: string;
+            fullName: string | null;
+        } | null;
+        admin: {
+            id: string;
+            email: string;
+            fullName: string | null;
+        } | null;
+        buyer: {
+            id: string;
+            email: string;
+            phoneNumber: string | null;
+            fullName: string | null;
+        };
+    } & {
+        id: string;
+        status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+        createdAt: Date;
+        verifiedAt: Date | null;
+        paidAt: Date;
+        adminId: string | null;
+        buyerId: string;
+        milestoneId: string;
+        agentId: string | null;
+        amountPaid: number;
+        proofUrls: string[];
+        agentReviewedAt: Date | null;
+        rejectedAt: Date | null;
+        rejectionReason: string | null;
+        notes: string | null;
+        isReadByBuyer: boolean;
+        isReadByAgent: boolean;
+        isReadByAdmin: boolean;
+        agentDocumentUrls: string[];
+        agentDocumentNote: string | null;
+        agentUploadedAt: Date | null;
+    }>;
+    markAsRead(paymentId: string, userRole: string): Promise<{
+        id: string;
+        status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+        createdAt: Date;
+        verifiedAt: Date | null;
+        paidAt: Date;
+        adminId: string | null;
+        buyerId: string;
+        milestoneId: string;
+        agentId: string | null;
+        amountPaid: number;
+        proofUrls: string[];
+        agentReviewedAt: Date | null;
+        rejectedAt: Date | null;
+        rejectionReason: string | null;
+        notes: string | null;
+        isReadByBuyer: boolean;
+        isReadByAgent: boolean;
+        isReadByAdmin: boolean;
+        agentDocumentUrls: string[];
+        agentDocumentNote: string | null;
+        agentUploadedAt: Date | null;
+    }>;
+    getUnreadCount(userId: string, role: string): Promise<{
+        unreadCount: number;
+    }>;
+}

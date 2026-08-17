@@ -1,0 +1,22 @@
+info:
+  name: isAlreadySaved
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/property/check?userId=a75af833-0358-4c98-b78f-20d9e22d8729&propertyId=03dfdfa7-d004-4569-b5e6-cd0beb3607af"
+  params:
+    - name: userId
+      value: a75af833-0358-4c98-b78f-20d9e22d8729
+      type: query
+    - name: propertyId
+      value: 03dfdfa7-d004-4569-b5e6-cd0beb3607af
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

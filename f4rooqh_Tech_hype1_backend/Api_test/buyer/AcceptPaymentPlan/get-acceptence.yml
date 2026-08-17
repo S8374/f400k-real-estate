@@ -1,0 +1,25 @@
+info:
+  name: get-acceptence
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/payment-plan/check?agentId=55ca7e69-af9f-4a65-a947-72d4dfef1821&propertyId=9f0d2b68-179c-439a-be77-abb4a56554f4&paymentPlanId=67669cbe-cf68-4c7e-a391-6f01018770e6"
+  params:
+    - name: agentId
+      value: 55ca7e69-af9f-4a65-a947-72d4dfef1821
+      type: query
+    - name: propertyId
+      value: 9f0d2b68-179c-439a-be77-abb4a56554f4
+      type: query
+    - name: paymentPlanId
+      value: 67669cbe-cf68-4c7e-a391-6f01018770e6
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

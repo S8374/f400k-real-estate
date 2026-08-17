@@ -1,0 +1,20 @@
+info:
+  name: get-allsaved-property
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/v1/property/user/{{userId}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: userId
+      value: a75af833-0358-4c98-b78f-20d9e22d8729
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

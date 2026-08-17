@@ -1,0 +1,30 @@
+info:
+  name: CreateMilestonePayment
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/buyer/milestone-payments/upload?buyerId=94f5116e-628e-4b7c-8c03-5578bfe3a5d1"
+  params:
+    - name: buyerId
+      value: 94f5116e-628e-4b7c-8c03-5578bfe3a5d1
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "milestoneId": "ddafbceb-4354-4e83-b2c2-51dc3869f230",
+        "propertyId": "66698577-b3f4-41f6-8242-d2d2d5016cc0",
+        "paymentplanId":"67669cbe-cf68-4c7e-a391-6f01018770e6",
+        "amountPaid": 400000,
+        "proofUrl": "https://storage.com/receipt.pdf",
+        "notes": "Payment completed"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,33 @@
+info:
+  name: verify-misltonpayment
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/admin/milestone-payments/verify"
+  body:
+    type: json
+    data: |-
+      {
+        "paymentId": "f8578b48-c87d-47f8-8302-be53a6763313",
+        "adminId": "e800092f-a73e-4d9b-a4bc-988ad5caa5c7",
+        "approve": true,
+        "notes": "All documents verified"
+      }
+
+
+      // {
+      //   "paymentId": "payment-123",
+      //   "adminId": "admin-123",
+      //   "approve": false,
+      //   "rejectionReason": "Receipt is blurry, please upload a clearer copy",
+      //   "notes": "Requesting resubmission"
+      // }b
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

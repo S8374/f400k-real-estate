@@ -1,0 +1,22 @@
+info:
+  name: save-property
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/v1/property/saved"
+  body:
+    type: json
+    data: |-
+      {
+        "userId": "a75af833-0358-4c98-b78f-20d9e22d8729",
+        "propertyId": "03dfdfa7-d004-4569-b5e6-cd0beb3607af"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
