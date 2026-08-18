@@ -76,6 +76,7 @@ export function useMapZoneFocus({
           if (hasValidCoords) {
             map.fitBounds(bounds, {
               padding: 100,
+              maxZoom: 11.5, // Ensure it stays zoomed out to show country context
               pitch: 0,
               bearing: 0,
               duration: 1500,

@@ -277,9 +277,9 @@ export default function PaymentMilestones({
   const handleMarkAsReceived = async (m: any) => {
     if (!m.paymentId) return;
     
-    // Safety check: Ensure either agent or buyer has uploaded proof
-    if (!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0) && !m.proofUrl && (!m.proofUrls || m.proofUrls.length === 0)) {
-      toast.error('A document proof must be uploaded before marking as received');
+    // Safety check: Ensure the agent has uploaded proof
+    if (!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0)) {
+      toast.error('You must upload a document proof before marking as received');
       return;
     }
 

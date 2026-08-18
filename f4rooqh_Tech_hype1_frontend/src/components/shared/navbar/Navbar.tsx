@@ -74,7 +74,7 @@ const Navbar = ({
       )}
     >
       <div className="w-full max-w-full px-4 sm:px-6 lg:px-8 xl:px-20 flex flex-col gap-4 items-center">
-        <div className="flex w-full items-center justify-between gap-3 xl:grid xl:grid-cols-[180px_minmax(0,1fr)_auto] xl:items-center xl:gap-3">
+        <div className="flex w-full items-center justify-between gap-3 xl:grid xl:grid-cols-[300px_minmax(0,1fr)_300px] xl:items-center xl:gap-3">
           {/* Logo */}
           <div className="flex items-center xl:justify-start">
             <Link href="/" className="shrink-0 relative w-48 h-16 sm:w-56 sm:h-20 xl:w-64 xl:h-24 block hover:opacity-90 transition-opacity">
@@ -89,7 +89,7 @@ const Navbar = ({
           </div>
 
           {/* Desktop Search */}
-          <div className="hidden xl:flex min-w-0 justify-center gap-2 items-center">
+          <div className="hidden xl:flex flex-1 w-full max-w-[1000px] mx-auto justify-center items-center bg-[#151515] border border-zinc-800 rounded-lg h-14 pl-2 pr-1 shadow-sm hover:border-zinc-700 transition-all">
             <SearchBar
               filters={filters}
               onFiltersChange={onFiltersChange}
@@ -190,7 +190,7 @@ const Navbar = ({
       </div>
       
       {/* Category Pills with Loading Skeleton */}
-      <div className="w-full max-w-280 px-4 mt-4 md:px-0">
+      <div className="w-full max-w-280 mt-4">
         {isCategoriesLoading ? (
           <CategoryPillsSkeleton />
         ) : (
@@ -199,27 +199,9 @@ const Navbar = ({
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
               categories={categories}
+              activeSubCategories={subCategories}
+              activeMainCategory={activeMainCategory || selectedCategory}
             />
-            <AnimatePresence>
-              {subCategories.length > 0 && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                  animate={{ height: "auto", opacity: 1, marginTop: 4 }}
-                  exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-2 border-t border-zinc-600/50">
-                    <CategoryPills
-                      selectedCategory={selectedCategory}
-                      setSelectedCategory={setSelectedCategory}
-                      categories={subCategories}
-                      isSubCategory={true}
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         )}
       </div>

@@ -10,47 +10,51 @@ export declare class MilestoneService {
         message: string;
         data: {
             plan: {
+                id: string;
+                name: string;
                 property: {
                     id: string;
                     title: string;
                 };
-                id: string;
-                name: string;
             };
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         };
     }>;
     findAll(filterDto: FilterMilestoneDto): Promise<{
         success: boolean;
         data: ({
-            _count: {
-                payments: number;
-            };
             plan: {
+                id: string;
+                name: string;
                 property: {
                     id: string;
                     title: string;
                 };
+            };
+            payments: {
                 id: string;
-                name: string;
+                status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+            }[];
+            _count: {
+                payments: number;
             };
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         })[];
         meta: {
             total: number;
@@ -70,26 +74,26 @@ export declare class MilestoneService {
                 };
             } & {
                 id: string;
-                createdAt: Date;
-                name: string;
                 description: string | null;
+                name: string;
                 propertyId: string;
                 totalInstallments: number | null;
                 createdById: string | null;
+                createdAt: Date;
             };
             payments: {
                 id: string;
-                status: import("@prisma/client").$Enums.MilestonePaymentStatus;
                 createdAt: Date;
-                verifiedAt: Date | null;
-                paidAt: Date;
-                adminId: string | null;
-                buyerId: string;
+                status: import("@prisma/client").$Enums.MilestonePaymentStatus;
                 milestoneId: string;
+                buyerId: string;
                 agentId: string | null;
+                adminId: string | null;
                 amountPaid: number;
                 proofUrls: string[];
+                paidAt: Date;
                 agentReviewedAt: Date | null;
+                verifiedAt: Date | null;
                 rejectedAt: Date | null;
                 rejectionReason: string | null;
                 notes: string | null;
@@ -102,38 +106,42 @@ export declare class MilestoneService {
             }[];
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         };
     }>;
     findByPlan(planId: string, filterDto: FilterMilestoneDto): Promise<{
         success: boolean;
         data: ({
-            _count: {
-                payments: number;
-            };
             plan: {
+                id: string;
+                name: string;
                 property: {
                     id: string;
                     title: string;
                 };
+            };
+            payments: {
                 id: string;
-                name: string;
+                status: import("@prisma/client").$Enums.MilestonePaymentStatus;
+            }[];
+            _count: {
+                payments: number;
             };
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         })[];
         meta: {
             total: number;
@@ -152,22 +160,22 @@ export declare class MilestoneService {
                 };
             } & {
                 id: string;
-                createdAt: Date;
-                name: string;
                 description: string | null;
+                name: string;
                 propertyId: string;
                 totalInstallments: number | null;
                 createdById: string | null;
+                createdAt: Date;
             };
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         })[];
         count: number;
         timeframe: string;
@@ -182,13 +190,13 @@ export declare class MilestoneService {
             };
         } & {
             id: string;
-            description: string;
-            milestoneOrder: number;
-            planId: string;
             tittle: string | null;
+            milestoneOrder: number;
+            description: string;
             amount: number | null;
             dueDate: Date | null;
             constructionProgress: number | null;
+            planId: string;
         };
     }>;
     reorder(planId: string, items: {

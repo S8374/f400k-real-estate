@@ -25,22 +25,50 @@ export default function NotesViewModal({
         </DialogHeader>
         
         <div className="mt-6 space-y-6">
-           {/* Documents Gallery Section */}
-           {((viewNotesMilestone?.proofUrls?.length || 0) > 0 || (viewNotesMilestone?.agentDocumentUrls?.length || 0) > 0) && (
-             <div className="space-y-4">
-                <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest block mb-2">Uploaded Documents</span>
+           {/* Buyer Documents Gallery Section */}
+           {((viewNotesMilestone?.proofUrls?.length || 0) > 0 || viewNotesMilestone?.proofUrl) && (
+             <div className="space-y-3">
+                <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest block mb-1">Buyer Payment Proofs</span>
                 <div className="grid grid-cols-2 gap-3">
-                   {[...(viewNotesMilestone?.proofUrls || []), ...(viewNotesMilestone?.agentDocumentUrls || [])].map((url: string, idx: number) => (
+                   {((viewNotesMilestone?.proofUrls?.length > 0 ? viewNotesMilestone.proofUrls : (viewNotesMilestone?.proofUrl ? [viewNotesMilestone.proofUrl] : []))).map((url: string, idx: number) => (
                       <div 
-                        key={idx} 
-                        onClick={() => handleViewDocument(url, [...(viewNotesMilestone?.proofUrls || []), ...(viewNotesMilestone?.agentDocumentUrls || [])])}
-                        className="relative aspect-video bg-black/40 border border-gray-800 rounded overflow-hidden group cursor-pointer hover:border-[#EAB308]/50 transition-all"
+                        key={`buyer-doc-${idx}`} 
+                        onClick={() => handleViewDocument(url, viewNotesMilestone?.proofUrls || [viewNotesMilestone?.proofUrl].filter(Boolean))}
+                        className="relative aspect-video bg-black/40 border border-gray-800 rounded overflow-hidden group cursor-pointer hover:border-blue-500/50 transition-all"
                       >
                          {url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
-                            <img src={url} alt={`Doc ${idx}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <img src={url} alt={`Buyer Doc ${idx}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                          ) : (
                             <div className="w-full h-full flex flex-col items-center justify-center gap-2">
                                <FileText className="w-6 h-6 text-blue-500" />
+                               <span className="text-[10px] text-gray-500 font-bold">PDF Document</span>
+                            </div>
+                         )}
+                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <Eye className="w-5 h-5 text-white" />
+                         </div>
+                      </div>
+                   ))}
+                </div>
+             </div>
+           )}
+
+           {/* Agent Documents Gallery Section */}
+           {((viewNotesMilestone?.agentDocumentUrls?.length || 0) > 0 || viewNotesMilestone?.agentDocumentUrl) && (
+             <div className="space-y-3 pt-2">
+                <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest block mb-1">Agent Confirmation Proofs</span>
+                <div className="grid grid-cols-2 gap-3">
+                   {((viewNotesMilestone?.agentDocumentUrls?.length > 0 ? viewNotesMilestone.agentDocumentUrls : (viewNotesMilestone?.agentDocumentUrl ? [viewNotesMilestone.agentDocumentUrl] : []))).map((url: string, idx: number) => (
+                      <div 
+                        key={`agent-doc-${idx}`} 
+                        onClick={() => handleViewDocument(url, viewNotesMilestone?.agentDocumentUrls || [viewNotesMilestone?.agentDocumentUrl].filter(Boolean))}
+                        className="relative aspect-video bg-black/40 border border-gray-800 rounded overflow-hidden group cursor-pointer hover:border-emerald-500/50 transition-all"
+                      >
+                         {url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
+                            <img src={url} alt={`Agent Doc ${idx}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                         ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+                               <Shield className="w-6 h-6 text-emerald-500" />
                                <span className="text-[10px] text-gray-500 font-bold">PDF Document</span>
                             </div>
                          )}

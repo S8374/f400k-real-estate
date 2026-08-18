@@ -31,8 +31,8 @@ export function usePropertyVerification() {
   const [viewingProperty, setViewingProperty] = useState<any>(null);
   const [isProcessing, setIsProcessing] = useState<string | null>(null);
 
-  const { data: pendingRes, isLoading: pendingLoading } = useGetPendingPropertiesQuery({});
-  const { data: verifiedRes, isLoading: verifiedLoading } = useGetVerifiedPropertiesQuery({});
+  const { data: pendingRes, isLoading: pendingLoading } = useGetPendingPropertiesQuery(undefined);
+  const { data: verifiedRes, isLoading: verifiedLoading } = useGetVerifiedPropertiesQuery(undefined);
   
   const { data: detailsData, isFetching: detailsLoading } = useGetPropertyByIdQuery(viewingProperty?.id, { skip: !viewingProperty });
   const fullProperty = detailsData?.data?.data || detailsData?.data || detailsData || viewingProperty;

@@ -131,17 +131,23 @@ export default function MilestoneCard({
           </div>
 
           {isActive ? (
-            <div className="flex flex-wrap gap-x-8 gap-y-3 items-center py-1">
-              <div className="flex items-center gap-3">
-                <DollarSign className="w-4 h-4 text-[#EAB308]" />
-                <span className="text-[13px] text-gray-400">Amount:</span>
-                <span className="text-lg sm:text-xl font-bold text-white tracking-tight">SAR {m.amount?.toLocaleString()}</span>
-                <span className="text-[11px] text-gray-600 font-bold">(10%)</span>
+            <div className="flex flex-wrap gap-x-8 gap-y-3 py-1">
+              <div className="flex flex-wrap items-baseline gap-2">
+                <div className="flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-[#EAB308] shrink-0" />
+                  <span className="text-[13px] text-gray-400">Amount:</span>
+                </div>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-base sm:text-xl font-bold text-white tracking-tight">SAR {m.amount?.toLocaleString()}</span>
+                  <span className="text-[11px] text-gray-600 font-bold shrink-0">(10%)</span>
+                </div>
               </div>
-              <div className="flex items-center gap-3 sm:border-l border-gray-800 sm:pl-8">
-                <Layout className="w-4 h-4 text-emerald-500" />
-                <span className="text-[13px] text-gray-400">Construction Stage:</span>
-                <span className="text-lg sm:text-xl font-bold text-white tracking-tight">{m.constructionProgress}%</span>
+              <div className="flex flex-wrap items-baseline gap-2 sm:border-l border-gray-800 sm:pl-8">
+                <div className="flex items-center gap-2">
+                  <Layout className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <span className="text-[13px] text-gray-400">Construction Stage:</span>
+                </div>
+                <span className="text-base sm:text-xl font-bold text-white tracking-tight">{m.constructionProgress}%</span>
               </div>
             </div>
           ) : (m.paidAt || m.dueDate) && (
@@ -190,51 +196,81 @@ export default function MilestoneCard({
         {((m.proofUrls?.length || 0) > 0 || (m.agentDocumentUrls?.length || 0) > 0 || m.proofUrl || m.agentDocumentUrl) && (
            <div className="mb-4">
               <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest mb-3">Documentation</p>
-              <div className="space-y-2">
+               <div className="space-y-3">
                  {/* Buyer Documents Summary */}
                  {((m.proofUrls?.length || 0) > 0 || m.proofUrl) && (
-                    <div className="flex items-center justify-between p-3.5 bg-white/3 border border-gray-800/80 rounded hover:bg-white/5 transition-colors cursor-pointer group" onClick={() => handleViewNotes(m)}>
-                       <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded bg-blue-500/10 flex items-center justify-center text-blue-500">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 bg-white/3 border border-gray-800/80 rounded hover:bg-white/5 transition-colors cursor-pointer group" onClick={() => handleViewNotes(m)}>
+                       <div className="flex gap-3 min-w-0">
+                          <div className="w-8 h-8 rounded bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
                              <FileText className="w-4 h-4" />
                           </div>
-                          <div className="flex flex-col">
-                             <span className="text-[13px] text-gray-300 font-bold group-hover:text-[#EAB308] transition-colors">Buyer Payment Proofs</span>
-                             <span className="text-[10px] text-gray-500 font-medium tracking-tight">{(m.proofUrls?.length || (m.proofUrl ? 1 : 0))} Document(s) • Click to view details</span>
+                          <div className="flex flex-col min-w-0">
+                             <span className="text-[13px] text-gray-300 font-bold group-hover:text-[#EAB308] transition-colors truncate">Buyer Payment Proofs</span>
+                             <span className="text-[10px] text-gray-500 font-medium tracking-tight truncate">{(m.proofUrls?.length || (m.proofUrl ? 1 : 0))} Document(s) • Click to view details</span>
+                             <div className="flex flex-wrap items-center gap-2 mt-2 sm:hidden">
+                                 {role === 'BUYER' && m.isReadByAgent && (
+                                    <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20 whitespace-nowrap shrink-0">
+                                       Agent Read
+                                    </span>
+                                 )}
+                                 {role === 'BUYER' && !m.isReadByAgent && (
+                                    <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20 whitespace-nowrap shrink-0">
+                                       Agent Unread
+                                    </span>
+                                 )}
+                                 {m.isReadByAdmin && (
+                                    <span className="flex items-center gap-1 text-[10px] text-purple-400 font-bold bg-purple-400/5 px-2 py-0.5 rounded-full border border-purple-400/20 whitespace-nowrap shrink-0">
+                                       Admin Read
+                                    </span>
+                                 )}
+                                 {role === 'AGENT' && !m.isReadByAgent && (
+                                    <button 
+                                      onClick={(e) => { e.stopPropagation(); handleMarkAsRead(m); }} 
+                                      className="text-[11px] text-amber-500 font-bold hover:underline whitespace-nowrap shrink-0"
+                                    >
+                                      Mark as Read
+                                    </button>
+                                 )}
+                                 {role === 'AGENT' && m.isReadByAgent && (
+                                    <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
+                                       <CheckCircle2 className="w-3 h-3" /> Read
+                                    </span>
+                                 )}
+                             </div>
                           </div>
                        </div>
-                       <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-2">
+                       <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto mt-1 sm:mt-0">
+                          <div className="hidden sm:flex flex-wrap items-center gap-2">
                              {role === 'BUYER' && m.isReadByAgent && (
-                                <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20">
+                                <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20 whitespace-nowrap shrink-0">
                                    Agent Read
                                 </span>
                              )}
                              {role === 'BUYER' && !m.isReadByAgent && (
-                                <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20">
+                                <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20 whitespace-nowrap shrink-0">
                                    Agent Unread
                                 </span>
                              )}
                              {m.isReadByAdmin && (
-                                <span className="flex items-center gap-1 text-[10px] text-purple-400 font-bold bg-purple-400/5 px-2 py-0.5 rounded-full border border-purple-400/20">
+                                <span className="flex items-center gap-1 text-[10px] text-purple-400 font-bold bg-purple-400/5 px-2 py-0.5 rounded-full border border-purple-400/20 whitespace-nowrap shrink-0">
                                    Admin Read
                                 </span>
                              )}
                              {role === 'AGENT' && !m.isReadByAgent && (
                                 <button 
                                   onClick={(e) => { e.stopPropagation(); handleMarkAsRead(m); }} 
-                                  className="text-[11px] text-amber-500 font-bold hover:underline"
+                                  className="text-[11px] text-amber-500 font-bold hover:underline whitespace-nowrap shrink-0"
                                 >
                                   Mark as Read
                                 </button>
                              )}
                              {role === 'AGENT' && m.isReadByAgent && (
-                                <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
                                    <CheckCircle2 className="w-3 h-3" /> Read
                                 </span>
                              )}
                           </div>
-                          <button className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 group-hover:text-[#EAB308] group-hover:bg-[#EAB308]/10 transition-all">
+                          <button className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 group-hover:text-[#EAB308] group-hover:bg-[#EAB308]/10 transition-all shrink-0 ml-auto sm:ml-0">
                              <Eye className="w-4 h-4" />
                           </button>
                        </div>
@@ -243,43 +279,68 @@ export default function MilestoneCard({
 
                  {/* Agent Documents Summary */}
                  {((m.agentDocumentUrls?.length || 0) > 0 || m.agentDocumentUrl) && (
-                    <div className="flex items-center justify-between p-3.5 bg-white/3 border border-gray-800/80 rounded hover:bg-white/5 transition-colors cursor-pointer group" onClick={() => handleViewNotes(m)}>
-                       <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 bg-white/3 border border-gray-800/80 rounded hover:bg-white/5 transition-colors cursor-pointer group" onClick={() => handleViewNotes(m)}>
+                       <div className="flex gap-3 min-w-0">
+                          <div className="w-8 h-8 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
                              <Shield className="w-4 h-4" />
                           </div>
-                          <div className="flex flex-col">
-                             <span className="text-[13px] text-gray-300 font-bold group-hover:text-emerald-500 transition-colors">Agent Confirmation Proofs</span>
-                             <span className="text-[10px] text-gray-500 font-medium tracking-tight">{(m.agentDocumentUrls?.length || (m.agentDocumentUrl ? 1 : 0))} Document(s) • Click to view details</span>
+                          <div className="flex flex-col min-w-0">
+                             <span className="text-[13px] text-gray-300 font-bold group-hover:text-emerald-500 transition-colors truncate">Agent Confirmation Proofs</span>
+                             <span className="text-[10px] text-gray-500 font-medium tracking-tight truncate">{(m.agentDocumentUrls?.length || (m.agentDocumentUrl ? 1 : 0))} Document(s) • Click to view details</span>
+                             <div className="flex flex-wrap items-center gap-2 mt-2 sm:hidden">
+                                 {role === 'AGENT' && m.isReadByBuyer && (
+                                    <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20 whitespace-nowrap shrink-0">
+                                       Buyer Read
+                                    </span>
+                                 )}
+                                 {role === 'AGENT' && !m.isReadByBuyer && (
+                                    <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20 whitespace-nowrap shrink-0">
+                                       Buyer Unread
+                                    </span>
+                                 )}
+                                 {role === 'BUYER' && !m.isReadByBuyer && (
+                                    <button 
+                                      onClick={(e) => { e.stopPropagation(); handleMarkAsRead(m); }} 
+                                      className="text-[11px] text-[#EAB308] font-bold hover:underline whitespace-nowrap shrink-0"
+                                    >
+                                      Mark as Read
+                                    </button>
+                                 )}
+                                 {role === 'BUYER' && m.isReadByBuyer && (
+                                    <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
+                                       <CheckCircle2 className="w-3 h-3" /> Read
+                                    </span>
+                                 )}
+                             </div>
                           </div>
                        </div>
-                       <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-2">
+                       <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto mt-1 sm:mt-0">
+                          <div className="hidden sm:flex flex-wrap items-center gap-2">
                              {role === 'AGENT' && m.isReadByBuyer && (
-                                <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20">
+                                <span className="flex items-center gap-1 text-[10px] text-blue-400 font-bold bg-blue-400/5 px-2 py-0.5 rounded-full border border-blue-400/20 whitespace-nowrap shrink-0">
                                    Buyer Read
                                 </span>
                              )}
                              {role === 'AGENT' && !m.isReadByBuyer && (
-                                <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20">
+                                <span className="flex items-center gap-1 text-[10px] text-gray-500 font-bold bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20 whitespace-nowrap shrink-0">
                                    Buyer Unread
                                 </span>
                              )}
                              {role === 'BUYER' && !m.isReadByBuyer && (
                                 <button 
                                   onClick={(e) => { e.stopPropagation(); handleMarkAsRead(m); }} 
-                                  className="text-[11px] text-[#EAB308] font-bold hover:underline"
+                                  className="text-[11px] text-[#EAB308] font-bold hover:underline whitespace-nowrap shrink-0"
                                 >
                                   Mark as Read
                                 </button>
                              )}
                              {role === 'BUYER' && m.isReadByBuyer && (
-                                <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                                <span className="flex items-center gap-1 text-[10px] text-emerald-500/80 font-bold bg-emerald-500/5 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap shrink-0">
                                    <CheckCircle2 className="w-3 h-3" /> Read
                                 </span>
                              )}
                           </div>
-                          <button className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 group-hover:text-emerald-500 group-hover:bg-emerald-500/10 transition-all">
+                          <button className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 group-hover:text-emerald-500 group-hover:bg-emerald-500/10 transition-all shrink-0 ml-auto sm:ml-0">
                              <Eye className="w-4 h-4" />
                           </button>
                        </div>
@@ -321,17 +382,17 @@ export default function MilestoneCard({
                 </Button>
               )}
               <Button
-                disabled={!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0) && !m.proofUrl && (!m.proofUrls || m.proofUrls.length === 0)}
+                disabled={!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0)}
                 onClick={() => handleMarkAsReceived(m)}
                 className={`font-bold px-6 sm:px-9 h-11 rounded flex items-center gap-2.5 border-none shadow-lg transition-all ${
-                  !m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0) && !m.proofUrl && (!m.proofUrls || m.proofUrls.length === 0)
+                  !m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0)
                     ? 'bg-gray-600 cursor-not-allowed opacity-50 shadow-none'
                     : 'bg-[#059669] hover:bg-[#047857] text-white shadow-emerald-900/10 hover:scale-105'
                 }`}
               >
                 <FileText className="w-4 h-4" />
                 <span>Mark as Received</span>
-                {!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0) && !m.proofUrl && (!m.proofUrls || m.proofUrls.length === 0) && (
+                {!m.agentDocumentUrl && (!m.agentDocumentUrls || m.agentDocumentUrls.length === 0) && (
                   <Shield className="w-3.5 h-3.5 opacity-70 ml-1" />
                 )}
               </Button>

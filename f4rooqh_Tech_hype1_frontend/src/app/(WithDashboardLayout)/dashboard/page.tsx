@@ -234,9 +234,9 @@ export default function DashboardHomePage() {
     <div className="min-h-screen bg-linear-to-b from-stone-950 to-stone-900">
       <div className="max-w-full mx-auto space-y-8 p-4 md:p-6">
         {/* Welcome Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-linear-to-r from-emerald-900/20 to-transparent p-6 rounded border border-emerald-900/30">
-          <div>
-            <h1 className="text-3xl lg:text-4xl font-bold text-white">
+        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 bg-linear-to-r from-emerald-900/20 to-transparent p-6 rounded border border-emerald-900/30 relative z-10">
+          <div className="min-w-0 max-w-full">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white truncate whitespace-normal break-words">
               Welcome Back,{" "}
               <span className="text-emerald-400">
                 {user?.fullName || "Nayan Dhali"}

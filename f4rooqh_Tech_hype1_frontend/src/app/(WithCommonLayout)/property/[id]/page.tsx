@@ -437,7 +437,7 @@ const PropertyDetailsPage = () => {
 
   // Calculate max completed milestone order
   const maxCompletedOrder = sortedMilestones
-    .filter((m: any) => m.constructionProgress >= 100)
+    .filter((m: any) => m.payments && m.payments.length > 0)
     .reduce((max: number, m: any) => Math.max(max, m.milestoneOrder), 0);
 
 
@@ -1005,7 +1005,7 @@ const PropertyDetailsPage = () => {
                       {sortedMilestones.length > 0 ? (
                         sortedMilestones.map((milestone: any) => {
                           const isLocked = milestone.milestoneOrder > maxCompletedOrder + 1;
-                          const isCompleted = milestone.constructionProgress >= 100;
+                          const isCompleted = milestone.payments && milestone.payments.length > 0;
                           const isCurrent = milestone.milestoneOrder === maxCompletedOrder + 1;
 
                           return (

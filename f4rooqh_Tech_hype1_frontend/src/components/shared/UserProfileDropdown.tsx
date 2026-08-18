@@ -55,8 +55,7 @@ export default function UserProfileDropdown({
       if (res.success) {
         toast.success(res.message);
         setIsOpen(false);
-        router.refresh();
-        router.push("/login");
+        window.location.href = "/login";
       }
     } catch (error) {
       toast.error("Something went wrong!");

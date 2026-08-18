@@ -95,6 +95,15 @@ export class MilestoneService {
               },
             },
           },
+          payments: {
+            where: {
+              status: 'VERIFIED'
+            },
+            select: {
+              id: true,
+              status: true
+            }
+          },
           _count: {
             select: {
               payments: true,

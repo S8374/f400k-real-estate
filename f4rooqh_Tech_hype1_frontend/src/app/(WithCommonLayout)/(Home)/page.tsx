@@ -174,6 +174,7 @@ const HomePage = () => {
       color: zone.color,
       geojson: zone.geojson,
       isMainZone: true,
+      hasSubzones: backendZones.some((z: any) => z.parentId === zone.id && z.isActive !== false),
     }));
 
     return [

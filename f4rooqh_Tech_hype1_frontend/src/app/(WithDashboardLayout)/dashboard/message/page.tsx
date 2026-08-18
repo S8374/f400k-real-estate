@@ -334,10 +334,17 @@ export default function MessagesPage() {
               className="pl-10 bg-stone-900 text-gray-200 rounded h-10 border-0 focus-visible:ring-emerald-600/50"
             />
           </div>
-          {conversations.map((chat) => {
-            const other = chat.participants.find(p => p.id !== currentUserId);
-            const lastMsg = chat.messages?.[0];
-            const isOnline = other ? onlineUsers.has(other.id) : false;
+          {conversations.length === 0 ? (
+            <div className="flex flex-col items-center justify-center p-8 mt-10 text-gray-500 text-center gap-3">
+              <MessageSquare className="w-12 h-12 opacity-20" />
+              <p className="text-sm">No conversations yet.</p>
+              <p className="text-xs opacity-60">Your messages with buyers or agents will appear here.</p>
+            </div>
+          ) : (
+            conversations.map((chat) => {
+              const other = chat.participants.find(p => p.id !== currentUserId);
+              const lastMsg = chat.messages?.[0];
+              const isOnline = other ? onlineUsers.has(other.id) : false;
 
             return (
               <div
@@ -375,7 +382,7 @@ export default function MessagesPage() {
                 </div>
               </div>
             );
-          })}
+          }))}
         </div>
 
         {/* Chat Area */}

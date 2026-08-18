@@ -130,14 +130,14 @@ export default function MilestonesList({
   }
 
   const maxCompleted = milestones
-    .filter((m) => m.constructionProgress >= 100)
+    .filter((m) => m.payments && m.payments.length > 0)
     .reduce((max, m) => Math.max(max, m.milestoneOrder), 0);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {milestones.map((milestone) => {
         const isCurrent = milestone.milestoneOrder === maxCompleted + 1;
-        const isCompleted = milestone.constructionProgress >= 100;
+        const isCompleted = milestone.payments && milestone.payments.length > 0;
         const isLocked = milestone.milestoneOrder > maxCompleted + 1;
 
         const showAction = isCurrent && !isCompleted;

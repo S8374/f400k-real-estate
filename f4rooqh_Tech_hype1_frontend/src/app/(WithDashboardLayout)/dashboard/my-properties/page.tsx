@@ -41,9 +41,9 @@ export default function MyPropertiesPage() {
   return (
     <div className="max-w-full mx-auto space-y-6">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-          <h1 className="text-3xl lg:text-4xl font-bold text-white">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
+        <div className="min-w-0 max-w-full">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white truncate whitespace-normal break-words">
             Welcome Back,{" "}
             <span className="text-emerald-500">{user?.fullName}</span>
           </h1>
@@ -63,24 +63,26 @@ export default function MyPropertiesPage() {
         </div>
 
         {/* Upload Property */}
-        {isVerified ? (
-          <Link href="/dashboard/my-properties/create">
+        <div className="shrink-0">
+          {isVerified ? (
+            <Link href="/dashboard/my-properties/create">
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-500 gap-2 cursor-pointer shadow-lg hover:shadow-emerald-600/20 transition-all"
+              >
+                <Upload className="h-4 w-4" />
+                Upload Property
+              </Button>
+            </Link>
+          ) : (
             <Button
-              className="bg-emerald-600 hover:bg-emerald-500 gap-2 cursor-pointer shadow-lg hover:shadow-emerald-600/20 transition-all"
+              className="bg-emerald-600/50 cursor-not-allowed gap-2 shadow-lg transition-all"
+              onClick={() => toast.error("You must be fully verified (REGA & Nafath) to upload properties.")}
             >
               <Upload className="h-4 w-4" />
               Upload Property
             </Button>
-          </Link>
-        ) : (
-          <Button
-            className="bg-emerald-600/50 cursor-not-allowed gap-2 shadow-lg transition-all"
-            onClick={() => toast.error("You must be fully verified (REGA & Nafath) to upload properties.")}
-          >
-            <Upload className="h-4 w-4" />
-            Upload Property
-          </Button>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Stats Cards */}

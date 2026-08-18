@@ -41,10 +41,10 @@ export const SearchBar = ({ isMobile = false, filters, onFiltersChange, onSearch
   return (
     <div
       className={cn(
-        "bg-[#151515] transition-all",
+        "transition-all",
         isMobile
-          ? "w-full rounded grid grid-cols-2 gap-2.5 p-3 border border-zinc-800 shadow-sm"
-          : "w-full max-w-280 rounded h-14 flex items-center px-2 border border-zinc-800 shadow-sm hover:border-zinc-700"
+          ? "w-full rounded-lg flex flex-col gap-2.5 p-3 bg-[#1c1c1c] border border-zinc-800 shadow-sm"
+          : "flex-1 w-full h-full flex items-center bg-transparent"
       )}
     >
       {/* Location */}
@@ -90,7 +90,7 @@ export const SearchBar = ({ isMobile = false, filters, onFiltersChange, onSearch
       <div className={cn(
         "flex items-center gap-2",
         isMobile
-          ? "w-full h-11 rounded border border-zinc-800 bg-[#1c1c1c] px-3 col-span-2"
+          ? "w-full pt-1"
           : "shrink-0 h-10 px-3 border-r border-zinc-800"
       )}>
         {!isMobile ? (

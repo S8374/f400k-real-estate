@@ -69,30 +69,30 @@ export function PropertiesTable({ properties }: PropertiesTableProps) {
       <div className="w-full bg-stone-900/60 border border-stone-800/80 rounded overflow-hidden shadow-xl backdrop-blur-md">
         <div className="w-full">
           <div>
-            {/* Header - Hidden on mobile */}
-            <div className="hidden md:grid md:grid-cols-12 gap-4 p-4 text-xs font-semibold text-stone-400 uppercase tracking-wider border-b border-stone-800/80 bg-stone-950/40">
-              <div className="col-span-4 pl-2">Listing Detail</div>
+            {/* Header - Hidden on mobile/tablet */}
+            <div className="hidden xl:grid xl:grid-cols-12 gap-4 p-4 text-xs font-semibold text-stone-400 uppercase tracking-wider border-b border-stone-800/80 bg-stone-950/40">
+              <div className="col-span-3 pl-2">Listing Detail</div>
               <div className="col-span-2">Price & Status</div>
               <div className="col-span-3">Analytics & Units</div>
               <div className="col-span-2">Listed Date</div>
-              <div className="col-span-1 text-right pr-4">Actions</div>
+              <div className="col-span-2 text-right pr-2">Actions</div>
             </div>
             
             {/* Body */}
             <div className="divide-y divide-stone-800/50 bg-stone-900/20">
               {currentItems.length > 0 ? (
                 currentItems.map((property) => (
-                  <div key={property.id} className="flex flex-col md:grid md:grid-cols-12 gap-4 p-4 items-start md:items-center hover:bg-stone-800/40 transition-colors duration-200">
+                  <div key={property.id} className="flex flex-col xl:grid xl:grid-cols-12 gap-4 p-4 items-start xl:items-center hover:bg-stone-800/40 transition-colors duration-200">
                     {/* Listing Detail */}
-                    <div className="md:col-span-4 flex items-center gap-4 pl-0 md:pl-2 w-full">
-                      <div className="relative h-16 w-24 md:h-14 md:w-20 rounded overflow-hidden shrink-0 border border-stone-700/50">
+                    <div className="xl:col-span-3 flex items-center gap-3 pl-0 xl:pl-2 w-full">
+                      <div className="relative h-16 w-24 xl:h-14 xl:w-20 rounded overflow-hidden shrink-0 border border-stone-700/50">
                         <Image src={property.images?.[0] || "/no-image.png"} alt={property.title} fill className="object-cover" />
                       </div>
-                      <div className="flex flex-col flex-1">
-                        <h4 className="font-semibold text-stone-200 text-base md:text-sm line-clamp-1">{property.title}</h4>
-                        <p className="text-xs text-stone-500 line-clamp-1 mt-0.5">{property.addressLine || property.location || "No address provided"}</p>
+                      <div className="flex flex-col flex-1 min-w-0">
+                        <h4 className="font-semibold text-stone-200 text-base xl:text-sm truncate w-full">{property.title}</h4>
+                        <p className="text-xs text-stone-500 truncate w-full mt-0.5">{property.addressLine || property.location || "No address provided"}</p>
                         {property.isRegaVerified && (
-                          <div className="flex items-center gap-1 mt-1.5">
+                          <div className="flex items-center gap-1 mt-1.5 shrink-0">
                             <ShieldCheck className="w-3 h-3 text-emerald-500" />
                             <span className="text-[10px] font-medium text-emerald-500">REGA VERIFIED</span>
                           </div>
@@ -100,50 +100,51 @@ export function PropertiesTable({ properties }: PropertiesTableProps) {
                       </div>
                     </div>
                     
-                    <div className="w-full grid grid-cols-2 md:contents gap-4 mt-2 md:mt-0">
+                    <div className="w-full grid grid-cols-2 xl:contents gap-4 mt-2 xl:mt-0">
                       {/* Price & Status */}
-                      <div className="md:col-span-2 flex flex-col items-start justify-center">
-                        <span className="text-[10px] text-stone-500 uppercase md:hidden mb-1">Price</span>
-                        <span className="font-semibold text-emerald-400 text-sm">{formatCurrency(Number(property.price))}</span>
+                      <div className="xl:col-span-2 flex flex-col items-start justify-center">
+                        <span className="text-[10px] text-stone-500 uppercase xl:hidden mb-1">Price</span>
+                        <span className="font-semibold text-emerald-400 text-sm truncate w-full">{formatCurrency(Number(property.price))}</span>
                         <Badge variant="outline" className={`mt-1.5 px-2 py-0 h-5 text-[10px] font-semibold border ${getStatusColor(property.status)}`}>
                           {property.status}
                         </Badge>
                       </div>
 
-                      {/* Listed Date */}
-                      <div className="md:col-span-2 flex flex-col items-start md:justify-center order-last md:order-none">
-                        <span className="text-[10px] text-stone-500 uppercase md:hidden mb-1">Listed Date</span>
-                        <span className="text-sm text-stone-300">{formatDate(property.createdAt)}</span>
-                        {property.type && (
-                          <span className="text-xs text-stone-500 mt-1 capitalize">{property.type.replace('_', ' ')}</span>
-                        )}
+                      {/* Analytics */}
+                      <div className="xl:col-span-3 flex items-center justify-between xl:justify-start gap-2 col-span-2 mt-2 xl:mt-0 pt-3 xl:pt-0 border-t border-stone-800/50 xl:border-t-0">
+                        <div className="flex flex-col items-center justify-center shrink-0 min-w-[32px]">
+                          <span className="text-stone-300 font-medium text-sm">{property._count?.propertyViews || 0}</span>
+                          <span className="text-[9px] sm:text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Views</span>
+                        </div>
+                        <div className="w-px h-6 bg-stone-800 hidden xl:block shrink-0"></div>
+                        <div className="flex flex-col items-center justify-center shrink-0 min-w-[32px]">
+                          <span className="text-stone-300 font-medium text-sm">{property._count?.savedBy || 0}</span>
+                          <span className="text-[9px] sm:text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Saves</span>
+                        </div>
+                        <div className="w-px h-6 bg-stone-800 hidden xl:block shrink-0"></div>
+                        <div className="flex flex-col items-center justify-center shrink-0 min-w-[32px]">
+                          <span className="text-stone-300 font-medium text-sm">{property.totalUnits || property._count?.units || 0}</span>
+                          <span className="text-[9px] sm:text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Units</span>
+                        </div>
                       </div>
 
-                      {/* Analytics */}
-                      <div className="md:col-span-3 flex items-center justify-between md:justify-start gap-4 col-span-2 mt-2 md:mt-0 pt-3 md:pt-0 border-t border-stone-800/50 md:border-t-0">
-                        <div className="flex flex-col items-center justify-center">
-                          <span className="text-stone-300 font-medium text-sm">{property._count?.propertyViews || 0}</span>
-                          <span className="text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Views</span>
-                        </div>
-                        <div className="w-px h-6 bg-stone-800 hidden md:block"></div>
-                        <div className="flex flex-col items-center justify-center">
-                          <span className="text-stone-300 font-medium text-sm">{property._count?.savedBy || 0}</span>
-                          <span className="text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Saves</span>
-                        </div>
-                        <div className="w-px h-6 bg-stone-800 hidden md:block"></div>
-                        <div className="flex flex-col items-center justify-center">
-                          <span className="text-stone-300 font-medium text-sm">{property.totalUnits || property._count?.units || 0}</span>
-                          <span className="text-[10px] text-stone-500 uppercase tracking-wider mt-0.5">Units</span>
-                        </div>
+                      {/* Listed Date */}
+                      <div className="xl:col-span-2 flex flex-col items-start xl:justify-center order-last xl:order-none min-w-0">
+                        <span className="text-[10px] text-stone-500 uppercase xl:hidden mb-1">Listed Date</span>
+                        <span className="text-sm text-stone-300 truncate w-full">{formatDate(property.createdAt)}</span>
+                        {property.type && (
+                          <span className="text-xs text-stone-500 mt-1 capitalize truncate w-full">{property.type.replace('_', ' ')}</span>
+                        )}
                       </div>
                     </div>
 
                     {/* Actions */}
-                    <div className="md:col-span-1 flex items-center justify-end gap-2 w-full md:w-auto mt-3 md:mt-0 pr-0 md:pr-2 pt-3 md:pt-0 border-t border-stone-800/50 md:border-t-0">
+                    {/* Actions */}
+                    <div className="xl:col-span-2 flex items-center flex-wrap justify-end gap-2 w-full xl:w-auto mt-3 xl:mt-0 pr-0 xl:pr-2 pt-3 xl:pt-0 border-t border-stone-800/50 xl:border-t-0">
                       <button
                         onClick={() => handleDelete(property.id)}
                         disabled={isDeleting === property.id}
-                        className="flex items-center justify-center p-2 bg-stone-800 hover:bg-red-600 text-stone-300 hover:text-white rounded transition-all border border-stone-700 hover:border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center justify-center p-2 bg-stone-800 hover:bg-red-600 text-stone-300 hover:text-white rounded transition-all border border-stone-700 hover:border-red-500 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
                         title="Delete Property"
                       >
                         {isDeleting === property.id ? (
@@ -154,10 +155,12 @@ export function PropertiesTable({ properties }: PropertiesTableProps) {
                       </button>
                       <Link 
                         href={`/dashboard/my-properties/${property.id}`}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2 md:py-1.5 w-full md:w-auto bg-stone-800 hover:bg-emerald-600 text-stone-300 hover:text-white rounded transition-all border border-stone-700 hover:border-emerald-500 text-sm md:text-xs font-medium"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 xl:py-1.5 w-full sm:w-auto bg-stone-800 hover:bg-emerald-600 text-stone-300 hover:text-white rounded transition-all border border-stone-700 hover:border-emerald-500 text-sm xl:text-xs font-medium shrink-0"
+                        title="Manage Property"
                       >
-                        <Settings2 className="w-4 h-4 md:w-3.5 md:h-3.5" />
-                        Manage Property
+                        <Settings2 className="w-4 h-4 xl:w-3.5 xl:h-3.5 shrink-0" />
+                        <span className="hidden 2xl:inline xl:hidden sm:inline">Manage Property</span>
+                        <span className="xl:inline 2xl:hidden hidden sm:hidden">Manage</span>
                       </Link>
                     </div>
                   </div>

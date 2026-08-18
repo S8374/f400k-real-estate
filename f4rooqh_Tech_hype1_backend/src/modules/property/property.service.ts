@@ -375,6 +375,13 @@ export class PropertyService {
             milestones: {
               orderBy: {
                 milestoneOrder: 'asc'
+              },
+              include: {
+                payments: {
+                  where: {
+                    status: 'VERIFIED'
+                  }
+                }
               }
             }
           }

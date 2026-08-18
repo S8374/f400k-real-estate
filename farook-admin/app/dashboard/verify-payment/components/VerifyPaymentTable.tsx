@@ -100,12 +100,20 @@ export function VerifyPaymentTable({
                   <tr key={paymentId} className="hover:bg-white/5 transition-colors">
                     <td className="whitespace-nowrap py-5 pl-6 pr-3 text-sm">
                       <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded bg-[#1f1f1f] flex items-center justify-center border border-white/10">
-                          <Home className="h-5 w-5 text-gray-400" />
+                        <div className="h-10 w-10 rounded bg-[#1f1f1f] flex items-center justify-center border border-white/10 overflow-hidden shrink-0">
+                          {(payment?.milestone?.plan?.property?.media?.find((m: any) => m.isPrimary)?.url || payment?.milestone?.plan?.property?.media?.[0]?.url) ? (
+                            <img 
+                              src={payment?.milestone?.plan?.property?.media?.find((m: any) => m.isPrimary)?.url || payment?.milestone?.plan?.property?.media?.[0]?.url} 
+                              alt={propertyTitle} 
+                              className="w-full h-full object-cover" 
+                            />
+                          ) : (
+                            <Home className="h-5 w-5 text-gray-400" />
+                          )}
                         </div>
                         <div>
                           <p className="font-bold text-white truncate max-w-[200px]">{propertyTitle}</p>
-                          <p className="text-[10px] text-gray-500 font-mono">ID: {paymentId?.slice(-8)?.toUpperCase() || "N/A"}</p>
+                          <p className="text-[10px] text-gray-500 font-mono">ID: {payment?.milestone?.plan?.property?.id?.slice(-8)?.toUpperCase() || paymentId?.slice(-8)?.toUpperCase() || "N/A"}</p>
                         </div>
                       </div>
                     </td>

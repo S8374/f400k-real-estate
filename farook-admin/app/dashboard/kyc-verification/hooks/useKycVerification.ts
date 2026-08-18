@@ -102,7 +102,7 @@ export function useKycVerification() {
     data: allKycDocs = [],
     isLoading: pendingKycLoading,
     refetch: refetchAllKycDocs,
-  } = useGetAllKycDocumentsByAdminQuery({});
+  } = useGetAllKycDocumentsByAdminQuery(undefined);
   
   const [verifyKyc, { isLoading: verifyingKyc }] = useVerifyKycDocumentByAdminMutation();
 

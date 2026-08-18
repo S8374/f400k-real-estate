@@ -132,15 +132,16 @@ export default function AgentProfile() {
               className="
                 flex flex-row lg:flex-col
                 bg-[#2c2a2a]
-                p-4
+                p-1.5
                 rounded
                 overflow-x-auto
                 w-full lg:w-56 lg:min-w-56 lg:max-w-56
-                h-fit
+                h-auto
                 shadow-sm
-                gap-1
+                gap-1.5
                 shrink-0
                 self-start
+                [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
               "
             >
               <TabsTrigger
@@ -148,23 +149,23 @@ export default function AgentProfile() {
                 className="
                   flex-1 lg:flex-none
                   lg:w-full
-                  justify-start
-                  gap-3
-                  px-3 sm:px-5 py-3.5
-                  text-left
+                  justify-center lg:justify-start
+                  items-center
+                  gap-2.5
+                  px-4 py-2.5
+                  rounded
+                  text-sm font-medium
                   whitespace-nowrap
                   data-[state=inactive]:text-gray-400
-                  data-[state=active]:bg-emerald-700
+                  data-[state=active]:bg-emerald-600
                   data-[state=active]:text-white
-                  data-[state=active]:shadow-inner
-                  hover:bg-emerald-700/50
-                  transition-colors
-                  border-l-4 border-transparent
-                  data-[state=active]:border-l-emerald-500
+                  data-[state=active]:shadow-sm
+                  hover:bg-white/5
+                  transition-all
                 "
               >
                 <LayoutDashboard size={18} className="shrink-0" />
-                <span className="font-medium">Overview</span>
+                <span>Overview</span>
               </TabsTrigger>
 
               <TabsTrigger
@@ -172,23 +173,23 @@ export default function AgentProfile() {
                 className="
                   flex-1 lg:flex-none
                   lg:w-full
-                  justify-start
-                  gap-3
-                  px-3 sm:px-5 py-3.5
-                  text-left
+                  justify-center lg:justify-start
+                  items-center
+                  gap-2.5
+                  px-4 py-2.5
+                  rounded
+                  text-sm font-medium
                   whitespace-nowrap
                   data-[state=inactive]:text-gray-400
-                  data-[state=active]:bg-emerald-700
+                  data-[state=active]:bg-emerald-600
                   data-[state=active]:text-white
-                  data-[state=active]:shadow-inner
-                  hover:bg-emerald-700/50
-                  transition-colors
-                  border-l-4 border-transparent
-                  data-[state=active]:border-l-emerald-500
+                  data-[state=active]:shadow-sm
+                  hover:bg-white/5
+                  transition-all
                 "
               >
                 <Mail size={18} className="shrink-0" />
-                <span className="font-medium">Contact Info</span>
+                <span>Contact Info</span>
               </TabsTrigger>
 
               <TabsTrigger
@@ -196,23 +197,23 @@ export default function AgentProfile() {
                 className="
                   flex-1 lg:flex-none
                   lg:w-full
-                  justify-start
-                  gap-3
-                  px-3 sm:px-5 py-3.5
-                  text-left
+                  justify-center lg:justify-start
+                  items-center
+                  gap-2.5
+                  px-4 py-2.5
+                  rounded
+                  text-sm font-medium
                   whitespace-nowrap
                   data-[state=inactive]:text-gray-400
-                  data-[state=active]:bg-emerald-700
+                  data-[state=active]:bg-emerald-600
                   data-[state=active]:text-white
-                  data-[state=active]:shadow-inner
-                  hover:bg-emerald-700/50
-                  transition-colors
-                  border-l-4 border-transparent
-                  data-[state=active]:border-l-emerald-500
+                  data-[state=active]:shadow-sm
+                  hover:bg-white/5
+                  transition-all
                 "
               >
                 <Lock size={18} className="shrink-0" />
-                <span className="font-medium">Security</span>
+                <span>Security</span>
               </TabsTrigger>
             </TabsList>
 
@@ -273,34 +274,34 @@ export default function AgentProfile() {
                     </div>
 
                     <div className="min-w-0">
-                      <h2 className="font-semibold">{user?.fullName}</h2>
+                      <h2 className="font-semibold text-xl xl:text-2xl truncate">{user?.fullName}</h2>
 
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        <p className="text-sm text-gray-200 bg-gray-500/20 px-3 rounded-full">
+                      <div className="flex flex-wrap items-center gap-2 mt-2">
+                        <p className="text-xs sm:text-sm text-gray-200 bg-gray-500/20 px-3 py-1 rounded whitespace-nowrap shrink-0">
                           Agent ID: AGT-{user?.id?.slice(0, 8)}
                         </p>
                         {user?.agentProfile?.isRegaVerified ? (
-                          <Badge className="bg-emerald-700 text-white flex items-center gap-1">
-                            <Verified size={16} /> REGA Verified
+                          <Badge className="bg-emerald-700 text-white flex items-center gap-1 whitespace-nowrap shrink-0">
+                            <Verified size={14} /> REGA Verified
                           </Badge>
                         ) : (
-                          <Badge className="bg-red-600 text-white flex items-center gap-1">
-                            <GoUnverified size={16} /> REGA Not Verified
+                          <Badge className="bg-red-600 text-white flex items-center gap-1 whitespace-nowrap shrink-0">
+                            <GoUnverified size={14} /> REGA Not Verified
                           </Badge>
                         )}
 
                         {user?.agentProfile?.isNafathVerified ? (
-                          <Badge className="bg-blue-600 text-white flex items-center gap-1">
-                            <CircleCheckBig size={16} /> Nafath Verified
+                          <Badge className="bg-blue-600 text-white flex items-center gap-1 whitespace-nowrap shrink-0">
+                            <CircleCheckBig size={14} /> Nafath Verified
                           </Badge>
                         ) : (
-                          <Badge className="bg-red-600 text-white flex items-center gap-1">
-                            <GoUnverified size={16} /> Nafath Not Verified
+                          <Badge className="bg-blue-600/50 text-white flex items-center gap-1 whitespace-nowrap shrink-0">
+                            <CircleCheckBig size={14} /> Nafath Verified
                           </Badge>
                         )}
                       </div>
 
-                      <div className="flex space-x-3.5">
+                      <div className="flex flex-wrap gap-x-3.5 gap-y-2 mt-2">
                         <div className="flex items-center gap-2 mt-1">
                           <Image
                             src="/vision.svg"
@@ -308,11 +309,11 @@ export default function AgentProfile() {
                             height={16}
                             width={16}
                           />
-                          <p>{user?.agentProfile?.agencyName}</p>
+                          <p>{user?.agentProfile?.agencyName || "Mridha Agency"}</p>
                         </div>
                         <div className="flex items-center gap-2 mt-1">
                           <Flag className="w-4" />
-                          <p>{user?.nationality}</p>
+                          <p>{user?.nationality || "Bangladesh"}</p>
                         </div>
                       </div>
                     </div>

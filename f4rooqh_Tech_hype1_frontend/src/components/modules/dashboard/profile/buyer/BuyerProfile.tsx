@@ -80,135 +80,138 @@ export default function BuyerProfile() {
                 {/* Sidebar – horizontal scroll on mobile, fixed-width column on sm+ */}
                 <TabsList
                     className="
-                            flex lg:flex-col
-                            bg-[#2c2a2a]
-                            p-4
-                            rounded
-                            overflow-x-auto lg:overflow-hidden
-                            w-full lg:w-56 lg:min-w-56
-                            h-fit
-                            shadow-sm
-                            gap-1
-          "
+                        flex flex-row lg:flex-col
+                        bg-[#2c2a2a]
+                        p-1.5
+                        rounded
+                        overflow-x-auto
+                        w-full lg:w-56 lg:min-w-56
+                        h-auto
+                        shadow-sm
+                        gap-1.5
+                        shrink-0
+                        self-start
+                        [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
+                    "
                 >
                     <TabsTrigger
                         value="overview"
                         className="
-                        group relative
-                        w-full
-                        justify-start
-                        gap-3
-                        px-5 py-3.5
-                        text-left
-                        whitespace-nowrap
-                        data-[state=inactive]:text-gray-400
-                        data-[state=active]:bg-emerald-700
-                        data-[state=active]:text-white
-                        data-[state=active]:shadow-inner
-                        hover:bg-emerald-700/50
-                        transition-colors
-                        border-l-4 border-transparent
-                        data-[state=active]:border-l-emerald-500
-            "
+                            flex-1 lg:flex-none
+                            lg:w-full
+                            justify-center lg:justify-start
+                            items-center
+                            gap-2.5
+                            px-4 py-2.5
+                            rounded
+                            text-sm font-medium
+                            whitespace-nowrap
+                            data-[state=inactive]:text-gray-400
+                            data-[state=active]:bg-emerald-600
+                            data-[state=active]:text-white
+                            data-[state=active]:shadow-sm
+                            hover:bg-white/5
+                            transition-all
+                        "
                     >
                         <LayoutDashboard size={18} className="shrink-0" />
-                        <span className="font-medium">Overview</span>
+                        <span>Overview</span>
                     </TabsTrigger>
 
                     <TabsTrigger
                         value="kyc_documents"
                         className="
-                        group relative
-                        w-full
-                        justify-start
-                        gap-3
-                        px-5 py-3.5
-                        text-left
-                        whitespace-nowrap
-                        data-[state=inactive]:text-gray-400
-                        data-[state=active]:bg-emerald-700
-                        data-[state=active]:text-white
-                        data-[state=active]:shadow-inner
-                        hover:bg-emerald-700/50
-                        transition-colors
-                        border-l-4 border-transparent
-                        data-[state=active]:border-l-emerald-500
-            "
+                            flex-1 lg:flex-none
+                            lg:w-full
+                            justify-center lg:justify-start
+                            items-center
+                            gap-2.5
+                            px-4 py-2.5
+                            rounded
+                            text-sm font-medium
+                            whitespace-nowrap
+                            data-[state=inactive]:text-gray-400
+                            data-[state=active]:bg-emerald-600
+                            data-[state=active]:text-white
+                            data-[state=active]:shadow-sm
+                            hover:bg-white/5
+                            transition-all
+                        "
                     >
                         <FileText size={18} className="shrink-0" />
-                        <span className="font-medium">KYC Documents</span>
+                        <span>KYC</span>
                     </TabsTrigger>
 
                     <TabsTrigger
                         value="contact"
                         className="
-                        group relative
-                        w-full
-                        justify-start
-                        gap-3
-                        px-5 py-3.5
-                        text-left
-                        whitespace-nowrap
-                        data-[state=inactive]:text-gray-400
-                        data-[state=active]:bg-emerald-700
-                        data-[state=active]:text-white
-                        data-[state=active]:shadow-inner
-                        hover:bg-emerald-700/50
-                        transition-colors
-                        border-l-4 border-transparent
-                        data-[state=active]:border-l-emerald-500
-            "
+                            flex-1 lg:flex-none
+                            lg:w-full
+                            justify-center lg:justify-start
+                            items-center
+                            gap-2.5
+                            px-4 py-2.5
+                            rounded
+                            text-sm font-medium
+                            whitespace-nowrap
+                            data-[state=inactive]:text-gray-400
+                            data-[state=active]:bg-emerald-600
+                            data-[state=active]:text-white
+                            data-[state=active]:shadow-sm
+                            hover:bg-white/5
+                            transition-all
+                        "
                     >
                         <Mail size={18} className="shrink-0" />
-                        <span className="font-medium">Contact Info</span>
+                        <span>Contact Info</span>
                     </TabsTrigger>
 
                     <TabsTrigger
                         value="property"
                         className="
-                        group relative
-                        w-full
-                        justify-start
-                        gap-3
-                        px-5 py-3.5
-                        text-left
-                        whitespace-nowrap
-                        data-[state=inactive]:text-gray-400
-                        data-[state=active]:bg-emerald-700
-                        data-[state=active]:text-white
-                        data-[state=active]:shadow-inner
-                        hover:bg-emerald-700/50
-                        transition-colors
-                        border-l-4 border-transparent
-                        data-[state=active]:border-l-emerald-500
-            "
+                            flex-1 lg:flex-none
+                            lg:w-full
+                            justify-center lg:justify-start
+                            items-center
+                            gap-2.5
+                            px-4 py-2.5
+                            rounded
+                            text-sm font-medium
+                            whitespace-nowrap
+                            data-[state=inactive]:text-gray-400
+                            data-[state=active]:bg-emerald-600
+                            data-[state=active]:text-white
+                            data-[state=active]:shadow-sm
+                            hover:bg-white/5
+                            transition-all
+                        "
                     >
                         <LandPlot size={18} className="shrink-0" />
-                        <span className="font-medium">Property</span>
+                        <span>Property</span>
                     </TabsTrigger>
 
                     <TabsTrigger
                         value="security"
                         className="
-                        group relative
-                        w-full
-                        justify-start
-                        gap-3
-                        px-5 py-3.5
-                        text-left
-                        whitespace-nowrap
-                        data-[state=inactive]:text-gray-400
-                        data-[state=active]:bg-emerald-700
-                        data-[state=active]:text-white
-                        data-[state=active]:shadow-inner
-                        hover:bg-emerald-700/50
-                        transition-colors
-                        border-l-4 border-transparent
-                        data-[state=active]:border-l-emerald-500
-            "
+                            flex-1 lg:flex-none
+                            lg:w-full
+                            justify-center lg:justify-start
+                            items-center
+                            gap-2.5
+                            px-4 py-2.5
+                            rounded
+                            text-sm font-medium
+                            whitespace-nowrap
+                            data-[state=inactive]:text-gray-400
+                            data-[state=active]:bg-emerald-600
+                            data-[state=active]:text-white
+                            data-[state=active]:shadow-sm
+                            hover:bg-white/5
+                            transition-all
+                        "
                     >
                         <Lock size={18} className="shrink-0" />
-                        <span className="font-medium">Security</span>
+                        <span>Security</span>
                     </TabsTrigger>
                 </TabsList>
 

@@ -108,8 +108,10 @@ const Banner = ({
         <div className="z-50 shrink-0 bg-white">
           <Navbar
             selectedCategory={selectedCategory}
+            activeMainCategory={activeMainCategory}
             setSelectedCategory={setSelectedCategory}
             categories={categories}
+            subCategories={subCategories}
             isCategoriesLoading={isCategoriesLoading}
             filters={filters}
             onFiltersChange={onFiltersChange}

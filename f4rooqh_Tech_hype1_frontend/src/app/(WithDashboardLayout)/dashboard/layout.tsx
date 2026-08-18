@@ -235,8 +235,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </header>
 
           {/* Page Content */}
-          <main className="flex-1 overflow-y-auto overflow-x-auto pt-6">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8 pb-12 min-h-screen min-w-[768px] lg:min-w-0">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden pt-6">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 pb-12 min-h-screen w-full">
               {children}
             </div>
           </main>
